@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Wish } from '@wishlist/data';
 
@@ -15,12 +15,18 @@ export class AppComponent {
   }
 
   fetch() {
-    this.http.get<Wish[]>('/api/wishes').subscribe(w => (this.wishes = w));
+    this.http.get<Wish[]>('/api/wishes/all').subscribe(w => (this.wishes = w));
   }
 
   addWish() {
-    this.http.post('/api/addWish', {}).subscribe(() => {
+    this.http.post('/api/wishes/add', {}).subscribe(() => {
       this.fetch();
     });
+  }
+
+  deleteWish(id: number) {
+    this.http.post('api/wishes/delete', { id: id }).subscribe(() => {
+      this.fetch();
+    })
   }
 }

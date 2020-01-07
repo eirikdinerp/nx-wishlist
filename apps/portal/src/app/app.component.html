@@ -1,5 +1,5 @@
 <h1>Whishes</h1>
 
-<wishlist-wishes [wishes]="wishes"></wishlist-wishes>
+<wishlist-wishes [wishes]="wishes" (deleteClicked)="deleteWish($event)"></wishlist-wishes>
 
 <button id="add-wish" (click)="addWish()">Add Wish</button>

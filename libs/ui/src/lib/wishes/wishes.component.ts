@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Wish } from '@wishlist/data';
+
 @Component({
   selector: 'wishlist-wishes',
   templateUrl: './wishes.component.html',
@@ -8,7 +9,13 @@ import { Wish } from '@wishlist/data';
 export class WishesComponent implements OnInit {
   @Input() wishes: Wish[];
 
-  constructor() {}
+  @Output() deleteClicked = new EventEmitter<number>();
 
-  ngOnInit() {}
+  constructor() { }
+
+  ngOnInit() { }
+
+  deleteWish(id: number) {
+    this.deleteClicked.emit(id);
+  }
 }

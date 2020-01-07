@@ -1,18 +1,11 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param } from '@nestjs/common';
 
 import { AppService } from './app.service';
+import { Wish } from '@wishlist/data';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
-  @Get('wishes')
-  getData() {
-    return this.appService.getData();
-  }
 
-  @Post('addWish')
-  addWish() {
-    return this.appService.addWish();
-  }
 }
