@@ -1,9 +1,21 @@
 # Wishlist
 
-
 To start api: `yarn start api`
 to start app: `yarn start`
 
+Generate cheatsheet:
+
+Component:
+`nx g component wishlist-detail --project=portal --module=wishlist`
+
+Service:
+`nx g service wishlist --project=portal`
+
+nest service
+`nx generate @nestjs/schematics:service wishlist --sourceRoot=apps/api/src --path=app`
+
+nest controller
+`nx generate @nestjs/schematics:controller wishlist --sourceRoot=apps/api/src --path=app`
 
 This project was generated using [Nx](https://nx.dev).
 

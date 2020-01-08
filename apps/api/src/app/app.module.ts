@@ -2,14 +2,14 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { WishesController } from './wishes/wishes.controller';
-import { WishesService } from './wishes/wishes.service';
 import { WishlistController } from './wishlist/wishlist.controller';
 import { WishlistService } from './wishlist/wishlist.service';
+import { WishController } from './wish/wish.controller';
+import { WishService } from './wish/wish.service';
 
 @Module({
   imports: [],
-  controllers: [AppController, WishesController, WishlistController],
-  providers: [AppService, WishesService, WishlistService],
+  controllers: [AppController, WishlistController, WishController],
+  providers: [AppService, WishlistService, WishService]
 })
-export class AppModule { }
+export class AppModule {}

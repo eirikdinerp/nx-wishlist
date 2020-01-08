@@ -19,7 +19,7 @@ export class WishlistListComponent implements OnInit {
     private router: Router,
     private wishlistService: WishlistService
   ) {
-    this.wishlists$ = this.wishlistService.getWishlists();
+    this.wishlists$ = this.wishlistService.getAll();
   }
 
   ngOnInit() {}

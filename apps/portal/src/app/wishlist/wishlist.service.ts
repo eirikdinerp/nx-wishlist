@@ -13,12 +13,12 @@ export class WishlistService {
 
   constructor(private http: HttpClient) {}
 
-  getWishlists(): Observable<WishList[]> {
+  getAll(): Observable<WishList[]> {
     return this.http.get<WishList[]>(`${this.apiRoot}/all`);
   }
 
-  getWishlist(id: number | string) {
-    return this.getWishlists().pipe(
+  getOne(id: number | string) {
+    return this.getAll().pipe(
       map((wishlists: WishList[]) => wishlists.find(wl => wl.id === +id))
     );
   }

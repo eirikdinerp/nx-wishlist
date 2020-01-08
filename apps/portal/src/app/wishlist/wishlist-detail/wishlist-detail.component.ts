@@ -19,7 +19,7 @@ export class WishlistDetailComponent implements OnInit {
   ) {
     this.wishlist$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
-        this.wishlistService.getWishlist(params.get('id'))
+        this.wishlistService.getOne(params.get('id'))
       )
     );
   }
