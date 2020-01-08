@@ -1,0 +1,28 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Your wishlists</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile
+      *ngFor="let wl of wishlists"
+      [colspan]="layout.cols"
+      [rowspan]="layout.rows"
+    >
+      <mat-card class="dashboard-card" (click)="onListClicked(wl)">
+        <mat-card-header>
+          <!-- <img
+            mat-card-image
+            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            alt="Photo of a Shiba Inu"
+          /> -->
+          <div mat-card-avatar class="list-image"></div>
+          <mat-card-title>
+            {{ wl.title }}
+          </mat-card-title>
+          <mat-card-subtitle>{{ wl.description }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>Card Content Here</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

@@ -3,7 +3,7 @@ import { Wish } from '@wishlist/data';
 
 @Injectable()
 export class WishesService {
-    private wishes: Wish[] = [{ id: this.generateId(), description: 'Wish 1' }, { id: this.generateId(), description: 'Wish 2' }];
+    private wishes: Wish[] = [{ id: this.generateId(), wishlistId: 1, description: 'Wish 1' }, { id: this.generateId(), wishlistId: 2, description: 'Wish 2' }];
 
     getAll(): Wish[] {
         return this.wishes;

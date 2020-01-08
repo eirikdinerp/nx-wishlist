@@ -1,5 +1,20 @@
-<h1>Whishes</h1>
-
-<wishlist-wishes [wishes]="wishes" (deleteClicked)="deleteWish($event)"></wishlist-wishes>
-
-<button id="add-wish" (click)="addWish()">Add Wish</button>
+<mat-toolbar color="primary">
+  <span>ThePortal</span>
+  <span class="fill-remaining-space"></span>
+  <a
+    mat-button
+    aria-label="Me"
+    [routerLink]="['/me']"
+    routerLinkActive="router-link-active"
+    >Me</a
+  >
+  <a
+    mat-button
+    aria-label="Wishlists"
+    [routerLink]="['/wishlists']"
+    routerLinkActive="router-link-active"
+  >
+    Wishlists</a
+  >
+</mat-toolbar>
+<router-outlet></router-outlet>

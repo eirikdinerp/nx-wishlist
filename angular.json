@@ -10,7 +10,7 @@
       },
       "root": "apps/portal",
       "sourceRoot": "apps/portal/src",
-      "prefix": "wishlist",
+      "prefix": "portal",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -22,7 +22,10 @@
             "tsConfig": "apps/portal/tsconfig.app.json",
             "aot": false,
             "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
-            "styles": ["apps/portal/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/portal/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -205,7 +208,7 @@
       "projectType": "library",
       "root": "libs/ui",
       "sourceRoot": "libs/ui/src",
-      "prefix": "wishlist",
+      "prefix": "ui",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",

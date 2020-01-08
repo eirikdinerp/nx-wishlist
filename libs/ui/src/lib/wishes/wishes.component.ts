@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Wish } from '@wishlist/data';
 
 @Component({
-  selector: 'wishlist-wishes',
+  selector: 'ui-wishes',
   templateUrl: './wishes.component.html',
   styleUrls: ['./wishes.component.scss']
 })
