@@ -22,9 +22,13 @@ export class WishService {
     return this.http.get<Wish[]>(`${this.apiRoot}/all/${wishlistId}`);
   }
 
-  getOne(wishlistId: number | string, id: number | string) {
+  getOne(wishlistId: string, id: string) {
     return this.getAll(wishlistId).pipe(
-      map((wishlists: Wish[]) => wishlists.find(wl => wl.id === +id))
+      map((wishlists: Wish[]) => wishlists.find(wl => wl._id === id))
     );
+  }
+
+  create(wish: Wish) {
+    return this.http.post(`${this.apiRoot}/create`, wish);
   }
 }

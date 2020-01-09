@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
-import { WishList } from '@wishlist/data';
+import { Wishlist } from '@wishlist/data';
+import { DialogNew } from '@wishlist/ui';
 
 import { WishlistService } from '../wishlist.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'portal-wishlist-list',
@@ -13,18 +16,46 @@ import { WishlistService } from '../wishlist.service';
   styleUrls: ['./wishlist-list.component.scss']
 })
 export class WishlistListComponent implements OnInit {
-  wishlists$: Observable<WishList[]>;
+  wishlists$: Observable<Wishlist[]>;
 
   constructor(
     private router: Router,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    public dialog: MatDialog
   ) {
     this.wishlists$ = this.wishlistService.getAll();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.create();
+  }
 
-  openWishlist(wl: WishList) {
-    this.router.navigate([`/wishlist/${wl.id}`]);
+  openWishlist(wl: Wishlist) {
+    this.router.navigate([`/wishlist/${wl['_id']}`]);
+  }
+
+  openNewDialog() {
+    const dialogRef = this.dialog.open(DialogNew, {
+      width: '250px',
+      data: { title: '' }
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        switchMap(result =>
+          result ? this.wishlistService.create(result) : of(null)
+        )
+      )
+      .subscribe(val => {});
+  }
+
+  create() {
+    const wl: Wishlist = {
+      title: 'Christmas 2020',
+      description: 'What I want for christmas this year'
+    };
+
+    this.wishlistService.create(wl).subscribe(w => console.log('created', w));
   }
 }

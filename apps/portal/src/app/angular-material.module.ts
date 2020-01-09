@@ -13,7 +13,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -30,8 +30,10 @@ import { MatListModule } from '@angular/material/list';
     MatSortModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
-  ], exports: [
+    MatListModule,
+    MatDialogModule
+  ],
+  exports: [
     MatCardModule,
     MatGridListModule,
     MatMenuModule,
@@ -43,7 +45,8 @@ import { MatListModule } from '@angular/material/list';
     MatSortModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
   ]
 })
-export class AngularMaterialModule { }
+export class AngularMaterialModule {}

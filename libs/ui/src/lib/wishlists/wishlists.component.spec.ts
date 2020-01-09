@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WishlistsComponent } from './wishlists.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
 
 describe('WishlistsComponent', () => {
   let component: WishlistsComponent;
@@ -8,9 +10,9 @@ describe('WishlistsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WishlistsComponent ]
-    })
-    .compileComponents();
+      declarations: [WishlistsComponent],
+      imports: [MatGridListModule, MatCardModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

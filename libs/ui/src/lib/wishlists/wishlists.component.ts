@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { WishList } from '@wishlist/data';
+import { Wishlist } from '@wishlist/data';
 
 @Component({
   selector: 'ui-wishlists',
@@ -9,8 +9,8 @@ import { WishList } from '@wishlist/data';
   styleUrls: ['./wishlists.component.scss']
 })
 export class WishlistsComponent {
-  @Input() wishlists: WishList[];
-  @Output() listClicked = new EventEmitter<WishList>();
+  @Input() wishlists: Wishlist[];
+  @Output() listClicked = new EventEmitter<Wishlist>();
 
   layout = {
     cols: 1,
@@ -30,7 +30,7 @@ export class WishlistsComponent {
     });
   }
 
-  onListClicked(wl: WishList) {
+  onListClicked(wl: Wishlist) {
     this.listClicked.emit(wl);
   }
 }

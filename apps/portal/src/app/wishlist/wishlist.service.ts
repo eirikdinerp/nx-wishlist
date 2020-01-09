@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { WishList } from '@wishlist/data';
+import { Wishlist } from '@wishlist/data';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,17 @@ export class WishlistService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<WishList[]> {
-    return this.http.get<WishList[]>(`${this.apiRoot}/all`);
+  getAll(): Observable<Wishlist[]> {
+    return this.http.get<Wishlist[]>(`${this.apiRoot}/all`);
   }
 
-  getOne(id: number | string) {
+  getOne(id: string) {
     return this.getAll().pipe(
-      map((wishlists: WishList[]) => wishlists.find(wl => wl.id === +id))
+      map((wishlists: Wishlist[]) => wishlists.find(wl => wl._id === id))
     );
+  }
+
+  create(wishlist: Wishlist) {
+    return this.http.post(`${this.apiRoot}/create`, wishlist);
   }
 }

@@ -2,3 +2,12 @@
   [wishlists]="wishlists$ | async"
   (listClicked)="openWishlist($event)"
 ></ui-wishlists>
+
+<button
+  class="fab-new"
+  mat-fab
+  aria-label="New wishlist"
+  (click)="openNewDialog()"
+>
+  <mat-icon>add</mat-icon>
+</button>

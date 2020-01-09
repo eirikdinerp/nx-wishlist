@@ -11,9 +11,9 @@ export class WishesComponent implements OnInit {
 
   @Output() deleteClicked = new EventEmitter<number>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   deleteWish(id: number) {
     this.deleteClicked.emit(id);

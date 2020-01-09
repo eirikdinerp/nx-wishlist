@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
-import { WishList } from '@wishlist/data';
+import { Wishlist } from '@wishlist/data';
 import { switchMap } from 'rxjs/operators';
 import { WishlistService } from '../wishlist.service';
 
@@ -11,7 +11,7 @@ import { WishlistService } from '../wishlist.service';
   styleUrls: ['./wishlist-detail.component.scss']
 })
 export class WishlistDetailComponent implements OnInit {
-  wishlist$: Observable<WishList>;
+  wishlist$: Observable<Wishlist>;
 
   constructor(
     private route: ActivatedRoute,

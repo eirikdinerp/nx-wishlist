@@ -1,15 +1,11 @@
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { WishlistController } from './wishlist/wishlist.controller';
-import { WishlistService } from './wishlist/wishlist.service';
-import { WishController } from './wish/wish.controller';
-import { WishService } from './wish/wish.service';
+import { WishlistModule } from './wishlist/wishlist.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController, WishlistController, WishController],
-  providers: [AppService, WishlistService, WishService]
+  imports: [MongooseModule.forRoot('mongodb://localhost/dev'), WishlistModule],
+  controllers: [],
+  providers: []
 })
 export class AppModule {}

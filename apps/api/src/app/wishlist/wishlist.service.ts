@@ -1,18 +1,21 @@
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { WishList } from '@wishlist/data';
+import { InjectModel } from '@nestjs/mongoose';
+import { Wishlist, WishlistDocument, CreateWishlistDto } from '@wishlist/data';
 
 @Injectable()
 export class WishlistService {
+  constructor(
+    @InjectModel('Wishlist')
+    private readonly wishlistModel: Model<WishlistDocument>
+  ) {}
 
-    private wishlists: WishList[] = [{ id: 1, title: 'Birthday' }, { id: 2, title: 'Christmas 2020' }];
+  async create(createWishlistDto: CreateWishlistDto): Promise<Wishlist> {
+    const createdWishlist = new this.wishlistModel(createWishlistDto);
+    return await createdWishlist.save();
+  }
 
-    getAll(): WishList[] {
-        return this.wishlists;
-    }
-
-    add() { }
-
-    remove(id: number) { }
-
-    update(list: WishList) { }
+  async findAll(): Promise<Wishlist[]> {
+    return await this.wishlistModel.find().exec();
+  }
 }
