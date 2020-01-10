@@ -1,11 +1,22 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { WishlistModule } from './wishlist/wishlist.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/dev'), WishlistModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    MongooseModule.forRootAsync({
+      imports: [],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get('MONGO_DB_URI')
+      }),
+      inject: [ConfigService]
+    }),
+    WishlistModule
+  ],
   controllers: [],
-  providers: []
+  providers: [ConfigService]
 })
 export class AppModule {}

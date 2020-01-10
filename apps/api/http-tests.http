@@ -1,0 +1,2 @@
+## Get all wishlists
+GET http://localhost:3333/api/wishlist/all HTTP/1.1
