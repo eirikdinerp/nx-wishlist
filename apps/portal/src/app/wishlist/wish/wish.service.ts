@@ -10,7 +10,7 @@ import { Wish } from '@wishlist/data';
   providedIn: 'root'
 })
 export class WishService {
-  private apiRoot = 'api/wish';
+  private apiRoot = 'api/wishlists';
 
   constructor(private http: HttpClient) {}
 
@@ -19,7 +19,7 @@ export class WishService {
     // const getOptions = {
     //   params: new HttpParams().set('wishlistId', '' + wishlistId)
     // };
-    return this.http.get<Wish[]>(`${this.apiRoot}/all/${wishlistId}`);
+    return this.http.get<Wish[]>(`${this.apiRoot}/${wishlistId}/wishes`);
   }
 
   getOne(wishlistId: string, id: string) {
@@ -29,6 +29,6 @@ export class WishService {
   }
 
   create(wish: Wish) {
-    return this.http.post(`${this.apiRoot}/create`, wish);
+    return this.http.post(`${this.apiRoot}/${wish.wishlistId}/wishes`, wish);
   }
 }

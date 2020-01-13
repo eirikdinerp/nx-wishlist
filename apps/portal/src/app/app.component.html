@@ -2,6 +2,7 @@
   <span>{{ title }}</span>
   <span class="fill-remaining-space"></span>
   <a
+    *ngIf="auth.loggedIn"
     mat-button
     aria-label="Me"
     [routerLink]="['/me']"
@@ -9,6 +10,7 @@
     >Me</a
   >
   <a
+    *ngIf="auth.loggedIn"
     mat-button
     aria-label="Wishlists"
     [routerLink]="['/wishlists']"
@@ -16,5 +18,12 @@
   >
     Wishlists</a
   >
+
+  <button mat-button (click)="auth.login()" *ngIf="!auth.loggedIn">
+    Log In
+  </button>
+  <button mat-button (click)="auth.logout()" *ngIf="auth.loggedIn">
+    Log Out
+  </button>
 </mat-toolbar>
 <router-outlet></router-outlet>

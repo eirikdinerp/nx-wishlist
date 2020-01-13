@@ -8,13 +8,15 @@ import { WishlistService } from './wishlist.service';
 
 import { WishlistController } from './wishlist.controller';
 import { WishService } from './wish/wish.service';
+import { AuthzModule } from '../authz/authz.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: 'Wishlist', schema: WishlistSchema },
       { name: 'Wish', schema: WishSchema }
-    ])
+    ]),
+    AuthzModule
   ],
   controllers: [WishlistController, WishController],
   providers: [WishlistService, WishService]

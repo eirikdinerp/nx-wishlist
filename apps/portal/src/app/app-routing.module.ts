@@ -9,11 +9,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const appRoutes: Routes = [
   // { path: 'wishlists', component: WishlistListComponent },
   { path: 'me', component: TableTestComponent },
-  {
-    path: '',
-    redirectTo: '/wishlists',
-    pathMatch: 'full'
-  },
   { path: '**', component: PageNotFoundComponent }
 ];
 

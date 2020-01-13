@@ -17,4 +17,8 @@ export class WishService {
   async findAll(wishListId: string): Promise<Wish[]> {
     return await this.wishModel.find({ wishlistId: wishListId }).exec();
   }
+
+  async remove(id: string): Promise<Wish> {
+    return await this.wishModel.findOneAndDelete({ _id: `${id}` });
+  }
 }

@@ -9,12 +9,12 @@ import { Wishlist } from '@wishlist/data';
   providedIn: 'root'
 })
 export class WishlistService {
-  private apiRoot = 'api/wishlist';
+  private apiRoot = 'api/wishlists';
 
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Wishlist[]> {
-    return this.http.get<Wishlist[]>(`${this.apiRoot}/all`);
+    return this.http.get<Wishlist[]>(`${this.apiRoot}`);
   }
 
   getOne(id: string) {
@@ -24,6 +24,6 @@ export class WishlistService {
   }
 
   create(wishlist: Wishlist) {
-    return this.http.post(`${this.apiRoot}/create`, wishlist);
+    return this.http.post(`${this.apiRoot}`, wishlist);
   }
 }

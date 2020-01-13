@@ -1,3 +1,7 @@
+<pre *ngIf="auth.userProfile$ | async as profile">
+  <code>{{ profile | json }}</code>
+  </pre>
+
 <div class="mat-elevation-z8">
   <table mat-table class="full-width-table" matSort aria-label="Elements">
     <!-- Id Column -->
