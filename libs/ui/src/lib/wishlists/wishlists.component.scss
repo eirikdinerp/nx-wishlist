@@ -2,8 +2,7 @@
   margin: 20px;
 }
 
-.dashboard-card {
-  cursor: pointer;
+.wishlist-card {
   position: absolute;
   top: 15px;
   left: 15px;
@@ -11,11 +10,11 @@
   bottom: 15px;
 }
 
-.dashboard-card-content {
+.wishlist-card-content {
   text-align: center;
 }
 
-.list-image {
+.wishlist-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
 }

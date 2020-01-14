@@ -13,9 +13,11 @@ import { AppComponent } from './app.component';
 import { TableTestComponent } from './table-test/table-test.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { WishlistModule } from './wishlist/wishlist.module';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
-  declarations: [AppComponent, TableTestComponent, PageNotFoundComponent],
+  declarations: [AppComponent, TableTestComponent, PageNotFoundComponent, HomeComponent, ProfileComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

@@ -4,11 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Observable, of } from 'rxjs';
 
-import { Wishlist } from '@wishlist/data';
+import { Wishlist, Wish } from '@wishlist/data';
 import { DialogNew } from '@wishlist/ui';
 
 import { WishlistService } from '../wishlist.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'portal-wishlist-list',
@@ -23,15 +23,21 @@ export class WishlistListComponent implements OnInit {
     private wishlistService: WishlistService,
     public dialog: MatDialog
   ) {
-    this.wishlists$ = this.wishlistService.getAll();
+    this.wishlists$ = this.wishlistService.wishlists$;
   }
 
   ngOnInit() {
-    // this.create();
+    this.wishlistService.getWishlists();
   }
 
   openWishlist(wl: Wishlist) {
     this.router.navigate([`/wishlist/${wl['_id']}`]);
+  }
+
+  deleteWishlist(wl: Wish) {
+    this.wishlistService
+      .remove(wl)
+      .subscribe(() => this.wishlistService.getWishlists());
   }
 
   openNewDialog() {
@@ -47,15 +53,10 @@ export class WishlistListComponent implements OnInit {
           result ? this.wishlistService.create(result) : of(null)
         )
       )
-      .subscribe(val => {});
-  }
-
-  create() {
-    const wl: Wishlist = {
-      title: 'Christmas 2020',
-      description: 'What I want for christmas this year'
-    };
-
-    this.wishlistService.create(wl).subscribe(w => console.log('created', w));
+      .subscribe(val => {
+        if (val) {
+          this.wishlistService.getWishlists();
+        }
+      });
   }
 }

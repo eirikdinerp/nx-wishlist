@@ -1,0 +1,21 @@
+.grid-container {
+  margin: 20px;
+}
+
+.wish-card {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.wish-card-content {
+  text-align: center;
+}
+
+.wish-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}

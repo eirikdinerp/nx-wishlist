@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { Wish } from '@wishlist/data';
 
@@ -12,17 +12,22 @@ import { Wish } from '@wishlist/data';
 export class WishService {
   private apiRoot = 'api/wishlists';
 
+  private readonly _wishes = new BehaviorSubject<Wish[]>([]);
+  readonly wishes$ = this._wishes.asObservable();
+
   constructor(private http: HttpClient) {}
 
-  getAll(wishlistId: number | string): Observable<Wish[]> {
-    // this is if I want to use query params
-    // const getOptions = {
-    //   params: new HttpParams().set('wishlistId', '' + wishlistId)
-    // };
-    return this.http.get<Wish[]>(`${this.apiRoot}/${wishlistId}/wishes`);
+  getWishes(wishlistId: string) {
+    this.getAll(wishlistId).subscribe();
   }
 
-  getOne(wishlistId: string, id: string) {
+  private getAll(wishlistId: number | string): Observable<Wish[]> {
+    return this.http
+      .get<Wish[]>(`${this.apiRoot}/${wishlistId}/wishes`)
+      .pipe(tap(ws => this._wishes.next(ws)));
+  }
+
+  private getOne(wishlistId: string, id: string) {
     return this.getAll(wishlistId).pipe(
       map((wishlists: Wish[]) => wishlists.find(wl => wl._id === id))
     );
@@ -30,5 +35,11 @@ export class WishService {
 
   create(wish: Wish) {
     return this.http.post(`${this.apiRoot}/${wish.wishlistId}/wishes`, wish);
+  }
+
+  remove(wish: Wish) {
+    return this.http.delete(
+      `${this.apiRoot}/${wish.wishlistId}/wishes/${wish._id}`
+    );
   }
 }

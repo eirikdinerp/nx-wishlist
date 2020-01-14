@@ -10,7 +10,8 @@ import { Wishlist } from '@wishlist/data';
 })
 export class WishlistsComponent {
   @Input() wishlists: Wishlist[];
-  @Output() listClicked = new EventEmitter<Wishlist>();
+  @Output() viewList = new EventEmitter<Wishlist>();
+  @Output() deleteList = new EventEmitter<Wishlist>();
 
   layout = {
     cols: 1,
@@ -30,7 +31,11 @@ export class WishlistsComponent {
     });
   }
 
-  onListClicked(wl: Wishlist) {
-    this.listClicked.emit(wl);
+  onViewClicked(wl: Wishlist) {
+    this.viewList.emit(wl);
+  }
+
+  onDeleteClicked(wl: Wishlist) {
+    this.deleteList.emit(wl);
   }
 }

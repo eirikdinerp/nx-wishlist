@@ -1,7 +1,19 @@
-import { Controller, Get, Post, Param, Body, Delete } from '@nestjs/common';
-import { WishService } from './wish.service';
+import {
+  Controller,
+  Get,
+  Post,
+  Param,
+  Body,
+  Delete,
+  UseGuards
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
 import { Wish, CreateWishDto } from '@wishlist/data';
 
+import { WishService } from './wish.service';
+
+@UseGuards(AuthGuard('jwt'))
 @Controller('wishlists/:id/wishes')
 export class WishController {
   constructor(private readonly service: WishService) {}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map, tap, shareReplay } from 'rxjs/operators';
 
 import { Wishlist } from '@wishlist/data';
 
@@ -11,10 +11,19 @@ import { Wishlist } from '@wishlist/data';
 export class WishlistService {
   private apiRoot = 'api/wishlists';
 
+  private readonly _wishlists = new BehaviorSubject<Wishlist[]>([]);
+  readonly wishlists$ = this._wishlists.asObservable();
+
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Wishlist[]> {
-    return this.http.get<Wishlist[]>(`${this.apiRoot}`);
+  getWishlists(): void {
+    this.getAll().subscribe();
+  }
+
+  private getAll(): Observable<Wishlist[]> {
+    return this.http
+      .get<Wishlist[]>(`${this.apiRoot}`)
+      .pipe(tap(wls => this._wishlists.next(wls)));
   }
 
   getOne(id: string) {
@@ -24,6 +33,10 @@ export class WishlistService {
   }
 
   create(wishlist: Wishlist) {
-    return this.http.post(`${this.apiRoot}`, wishlist);
+    return this.http.post(`${this.apiRoot}`, wishlist).pipe(map(t => t));
+  }
+
+  remove(wishlist: Wishlist) {
+    return this.http.delete(`${this.apiRoot}/${wishlist._id}`);
   }
 }

@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Wish } from '@wishlist/data';
 import { WishService } from '../wish.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap, flatMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogNew } from '@wishlist/ui';
 
@@ -20,16 +20,17 @@ export class WishListComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog
   ) {
-    this.wishes$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.service.getAll(params.get('id')))
-    );
+    this.wishes$ = this.service.wishes$;
   }
 
   ngOnInit() {
-    // this.create();
+    const wishlistId = this.route.snapshot.paramMap.get('id');
+    this.service.getWishes(wishlistId);
   }
 
   openNewDialog() {
+    const wishlistId = this.route.snapshot.paramMap.get('id');
+
     const dialogRef = this.dialog.open(DialogNew, {
       width: '250px',
       data: { title: '' }
@@ -40,23 +41,21 @@ export class WishListComponent implements OnInit {
       .pipe(
         switchMap(result => {
           if (result) {
-            const wishlistId = this.route.snapshot.paramMap.get('id');
             Object.assign(result, { wishlistId: wishlistId });
             return this.service.create(result);
           }
           return of(null);
         })
       )
-      .subscribe(val => {});
+      .subscribe(val => this.service.getWishes(wishlistId));
   }
 
-  create() {
-    const wishlistId = this.route.snapshot.paramMap.get('id');
-    const wish: Wish = {
-      title: 'new car',
-      wishlistId: wishlistId
-    };
+  openWish(w: Wish) {
+    console.log('Show wish details for', w);
+  }
 
-    this.service.create(wish).subscribe(w => console.log('created', w));
+  deleteWish(w: Wish) {
+    const wishlistId = this.route.snapshot.paramMap.get('id');
+    this.service.remove(w).subscribe(() => this.service.getWishes(wishlistId));
   }
 }

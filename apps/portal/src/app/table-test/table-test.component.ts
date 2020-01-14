@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { TableTestDataSource, TableTestItem } from './table-test-datasource';
-import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'portal-table-test',
@@ -19,7 +18,7 @@ export class TableTestComponent implements AfterViewInit, OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name'];
 
-  constructor(public auth: AuthService) {}
+  constructor() {}
 
   ngOnInit() {
     this.dataSource = new TableTestDataSource();

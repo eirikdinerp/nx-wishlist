@@ -1,9 +1,11 @@
 import { Component, ComponentFactoryResolver } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
-import { ToolbarService, ToolbarConfiguration, ToolbarBtn } from '@wishlist/ui';
 import { Observable, of } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap, flatMap } from 'rxjs/operators';
+
+import { ToolbarService, ToolbarConfiguration, ToolbarBtn } from '@wishlist/ui';
+
 import { AuthService } from './auth.service';
 
 @Component({
@@ -12,6 +14,7 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  sub;
   title = 'ThePortal';
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -29,21 +32,27 @@ export class AppComponent {
       title: 'Stonefree',
       buttons: [
         {
+          value: 'Home',
+          label: 'home',
+          visible$: of(true),
+          routerLink: '/'
+        },
+        {
           value: 'Me',
           label: 'me',
-          visible$: of(true),
+          visible$: this.auth.isAuthenticated$,
           routerLink: '/me'
         },
         {
           value: 'Wishlists',
           label: 'Wishlists',
-          visible$: of(true),
+          visible$: this.auth.isAuthenticated$,
           routerLink: '/wishlists'
         },
         {
           value: 'Log In',
           label: 'Log in',
-          visible$: this.auth.isAuthenticated$.pipe(map(isAuth => !isAuth)),
+          visible$: this.auth.isAuthenticated$.pipe(map(loggedIn => !loggedIn)),
           click: () => this.auth.login()
         },
         {

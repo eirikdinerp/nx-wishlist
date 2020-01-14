@@ -8,6 +8,9 @@
       aria-label="button.label"
       [routerLink]="button.routerLink ? [button.routerLink] : null"
       [routerLinkActive]="button.routerLink ? 'router-link-active' : ''"
+      [routerLinkActiveOptions]="
+        button.routerLink ? { exact: true } : { exact: false }
+      "
       (click)="button.click ? button.click() : null"
       >{{ button.value }}</a
     >

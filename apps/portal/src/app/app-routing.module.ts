@@ -3,9 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { TableTestComponent } from './table-test/table-test.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
-  { path: 'me', component: TableTestComponent },
+  { path: '', component: HomeComponent },
+  { path: 'me', component: ProfileComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 

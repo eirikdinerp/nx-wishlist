@@ -79,7 +79,7 @@ export class AuthService {
     checkAuth$.subscribe();
   }
 
-  login(redirectPath: string = '/me') {
+  login(redirectPath: string = '/') {
     // A desired redirect path can be passed to login method
     // (e.g., from a route guard)
     // Ensure Auth0 client instance exists
@@ -95,7 +95,7 @@ export class AuthService {
   private handleAuthCallback() {
     // Call when app reloads after user logs in with Auth0
     const params = window.location.search;
-    console.log('PARAMS', params);
+
     if (params.includes('code=') && params.includes('state=')) {
       let targetRoute: string; // Path to redirect to after login processsed
       const authComplete$ = this.handleRedirectCallback$.pipe(

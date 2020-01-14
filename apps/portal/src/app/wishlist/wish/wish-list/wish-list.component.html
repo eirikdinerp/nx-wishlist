@@ -1,4 +1,8 @@
-<ui-wishes [wishes]="wishes$ | async"></ui-wishes>
+<ui-wishes
+  [wishes]="wishes$ | async"
+  (viewWish)="openWish($event)"
+  (deleteWish)="deleteWish($event)"
+></ui-wishes>
 
 <button class="fab-new" mat-fab aria-label="New wish" (click)="openNewDialog()">
   <mat-icon>add</mat-icon>

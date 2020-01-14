@@ -9,13 +9,18 @@ import { Wish } from '@wishlist/data';
 export class WishesComponent implements OnInit {
   @Input() wishes: Wish[];
 
-  @Output() deleteClicked = new EventEmitter<number>();
+  @Output() viewWish = new EventEmitter<Wish>();
+  @Output() deleteWish = new EventEmitter<Wish>();
 
   constructor() {}
 
   ngOnInit() {}
 
-  deleteWish(id: number) {
-    this.deleteClicked.emit(id);
+  onDeleteClicked(w: Wish) {
+    this.deleteWish.emit(w);
+  }
+
+  onViewClicked(w: Wish) {
+    this.viewWish.emit(w);
   }
 }

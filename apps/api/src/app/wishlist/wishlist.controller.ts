@@ -13,6 +13,7 @@ import { WishlistService } from './wishlist.service';
 import { of } from 'rxjs';
 import { AuthGuard } from '@nestjs/passport';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('wishlists')
 export class WishlistController {
   constructor(private readonly wishlistService: WishlistService) {}
@@ -22,7 +23,6 @@ export class WishlistController {
     return await this.wishlistService.create(createWishlistDto);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get()
   async findAll(): Promise<Wishlist[]> {
     return this.wishlistService.findAll();

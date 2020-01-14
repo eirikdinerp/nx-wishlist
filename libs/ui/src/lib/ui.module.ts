@@ -6,6 +6,7 @@ import { WishlistsComponent } from './wishlists/wishlists.component';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { DialogNew } from './dialogs';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [CommonModule, AngularMaterialModule, RouterModule],
@@ -13,9 +14,15 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     WishesComponent,
     WishlistsComponent,
     DialogNew,
-    ToolbarComponent
+    ToolbarComponent,
+    FooterComponent
   ],
-  exports: [WishesComponent, WishlistsComponent, ToolbarComponent],
+  exports: [
+    WishesComponent,
+    WishlistsComponent,
+    ToolbarComponent,
+    FooterComponent
+  ],
   entryComponents: [DialogNew]
 })
 export class UiModule {}

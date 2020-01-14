@@ -1,6 +1,7 @@
 <ui-wishlists
   [wishlists]="wishlists$ | async"
-  (listClicked)="openWishlist($event)"
+  (viewList)="openWishlist($event)"
+  (deleteList)="deleteWishlist($event)"
 ></ui-wishlists>
 
 <button

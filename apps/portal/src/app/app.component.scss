@@ -1,1 +1,6 @@
+@import '../theme_variables.scss';
 
+ui-footer {
+  background-color: $primary;
+  color: $primary-contrast;
+}
