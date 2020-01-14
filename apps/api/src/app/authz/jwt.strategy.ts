@@ -7,18 +7,20 @@ import { passportJwtSecret } from 'jwks-rsa';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(configService: ConfigService) {
     super({
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
-        jwksUri: `https://dev-portal.eu.auth0.com/.well-known/jwks.json`
+        jwksUri: `${configService.get<string>(
+          'AUTH0_DOMAIN'
+        )}.well-known/jwks.json`
       }),
 
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      audience: 'https://stonefree-portal-auth.com',
-      issuer: `https://dev-portal.eu.auth0.com/`,
+      audience: configService.get<string>('AUTH0_AUDIENCE'),
+      issuer: `${configService.get<string>('AUTH0_DOMAIN')}`,
       algorithms: ['RS256']
     });
   }

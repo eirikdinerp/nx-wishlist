@@ -1,7 +1,8 @@
 import { Component, ComponentFactoryResolver } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
-import { Observable } from 'rxjs';
+import { ToolbarService, ToolbarConfiguration, ToolbarBtn } from '@wishlist/ui';
+import { Observable, of } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -21,6 +22,39 @@ export class AppComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public auth: AuthService
-  ) {}
+    public auth: AuthService,
+    private toolbarService: ToolbarService
+  ) {
+    const toolbarConfiguration: ToolbarConfiguration = {
+      title: 'Stonefree',
+      buttons: [
+        {
+          value: 'Me',
+          label: 'me',
+          visible$: of(true),
+          routerLink: '/me'
+        },
+        {
+          value: 'Wishlists',
+          label: 'Wishlists',
+          visible$: of(true),
+          routerLink: '/wishlists'
+        },
+        {
+          value: 'Log In',
+          label: 'Log in',
+          visible$: this.auth.isAuthenticated$.pipe(map(isAuth => !isAuth)),
+          click: () => this.auth.login()
+        },
+        {
+          value: 'Log Out',
+          label: 'Log out',
+          visible$: this.auth.isAuthenticated$,
+          click: () => this.auth.logout()
+        }
+      ]
+    };
+
+    this.toolbarService.setConfiguration(toolbarConfiguration);
+  }
 }

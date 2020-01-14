@@ -1,0 +1,15 @@
+<mat-toolbar color="primary" *ngIf="configuration">
+  <span>{{ configuration.title }}</span>
+  <span class="fill-remaining-space"></span>
+  <mat-nav-list *ngFor="let button of configuration.buttons">
+    <a
+      *ngIf="button.visible$ | async"
+      mat-button
+      aria-label="button.label"
+      [routerLink]="button.routerLink ? [button.routerLink] : null"
+      [routerLinkActive]="button.routerLink ? 'router-link-active' : ''"
+      (click)="button.click ? button.click() : null"
+      >{{ button.value }}</a
+    >
+  </mat-nav-list>
+</mat-toolbar>
