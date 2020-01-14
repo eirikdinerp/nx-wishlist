@@ -33,10 +33,14 @@ export class WishlistService {
   }
 
   create(wishlist: Wishlist) {
-    return this.http.post(`${this.apiRoot}`, wishlist).pipe(map(t => t));
+    return this.http.post(`${this.apiRoot}`, wishlist);
   }
 
   remove(wishlist: Wishlist) {
     return this.http.delete(`${this.apiRoot}/${wishlist._id}`);
+  }
+
+  update(wishlist: Wishlist) {
+    return this.http.put(`${this.apiRoot}/${wishlist._id}`, wishlist);
   }
 }

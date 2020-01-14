@@ -38,7 +38,7 @@ export class WishlistController {
     @Param('id') id: string,
     @Body() updateWishlistDto: CreateWishlistDto
   ) {
-    return `This action updates a #${id} wishlist`;
+    return this.wishlistService.update(id, updateWishlistDto);
   }
 
   @Delete(':id')

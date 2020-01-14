@@ -12,6 +12,7 @@ export class WishlistsComponent {
   @Input() wishlists: Wishlist[];
   @Output() viewList = new EventEmitter<Wishlist>();
   @Output() deleteList = new EventEmitter<Wishlist>();
+  @Output() saveList = new EventEmitter<Wishlist>();
 
   layout = {
     cols: 1,
@@ -37,5 +38,9 @@ export class WishlistsComponent {
 
   onDeleteClicked(wl: Wishlist) {
     this.deleteList.emit(wl);
+  }
+
+  onSaveClicked(wl: Wishlist) {
+    this.saveList.emit(wl);
   }
 }

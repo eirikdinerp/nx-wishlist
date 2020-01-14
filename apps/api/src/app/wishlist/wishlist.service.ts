@@ -36,4 +36,11 @@ export class WishlistService {
 
     return Promise.all([await removeWishes(), await removeWishlist()])[1];
   }
+
+  async update(
+    id: string,
+    updateWishlistDto: CreateWishlistDto
+  ): Promise<Wishlist> {
+    return this.wishlistModel.update({ _id: id }, updateWishlistDto);
+  }
 }

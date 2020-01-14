@@ -40,6 +40,10 @@ export class WishlistListComponent implements OnInit {
       .subscribe(() => this.wishlistService.getWishlists());
   }
 
+  saveWishlist(wl: Wish) {
+    this.wishlistService.update(wl).subscribe(t => console.log('updated:', t));
+  }
+
   openNewDialog() {
     const dialogRef = this.dialog.open(DialogNew, {
       width: '250px',
