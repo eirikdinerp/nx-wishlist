@@ -9,12 +9,13 @@ services:
     ports:
       - 27017:27017
   packages:
-    image: packages
+    image: wishlist-packages
     build:
       context: .
       dockerfile: packages.Dockerfile
   api:
     container_name: api
+    image: wishlist-api
     build:
       context: .
       dockerfile: api.Dockerfile
@@ -26,7 +27,8 @@ services:
       - MONGO_DB_URI=mongodb://mongo:27017/test
       - API_PORT=3333
   web:
-    container_name: portal
+    container_name: client
+    image: wishlist-client
     build:
       context: .
       dockerfile: portal.Dockerfile
