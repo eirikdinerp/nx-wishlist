@@ -22,7 +22,7 @@ export class AuthService {
       domain: 'dev-portal.eu.auth0.com',
       client_id: '1fYamRsGGCAVERLp5ND3zFsS3PagyyaR',
       redirect_uri: `${window.location.origin}`,
-      audience: 'https://stonefree-portal-auth.com'
+      audience: 'https://api.stonefree.com/wishlists'
     })
   ) as Observable<Auth0Client>).pipe(
     shareReplay(1), // Every subscription receives the same shared value
@@ -95,7 +95,6 @@ export class AuthService {
   private handleAuthCallback() {
     // Call when app reloads after user logs in with Auth0
     const params = window.location.search;
-
     if (params.includes('code=') && params.includes('state=')) {
       let targetRoute: string; // Path to redirect to after login processsed
       const authComplete$ = this.handleRedirectCallback$.pipe(

@@ -13,7 +13,8 @@ export interface Wishlist {
 
 export const WishlistSchema = new mongoose.Schema({
   title: String,
-  description: String
+  description: String,
+  ownerId: String
 });
 
 export interface WishlistDocument extends Document {

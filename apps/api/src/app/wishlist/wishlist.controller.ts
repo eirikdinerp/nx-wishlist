@@ -6,7 +6,8 @@ import {
   Param,
   Body,
   Delete,
-  UseGuards
+  UseGuards,
+  Req
 } from '@nestjs/common';
 import { Wishlist, CreateWishlistDto } from '@wishlist/data';
 import { WishlistService } from './wishlist.service';
@@ -19,13 +20,19 @@ export class WishlistController {
   constructor(private readonly wishlistService: WishlistService) {}
 
   @Post()
-  async create(@Body() createWishlistDto: CreateWishlistDto) {
+  async create(
+    @Body() createWishlistDto: CreateWishlistDto,
+    @Req() request: Request
+  ) {
+    const userId = request['user']['https://api.stonefree.com/email'];
+    createWishlistDto.ownerId = userId;
     return await this.wishlistService.create(createWishlistDto);
   }
 
   @Get()
-  async findAll(): Promise<Wishlist[]> {
-    return this.wishlistService.findAll();
+  async findAll(@Req() request: Request): Promise<Wishlist[]> {
+    const userId = request['user']['https://api.stonefree.com/email'];
+    return this.wishlistService.findAll(userId);
   }
 
   @Get(':id')

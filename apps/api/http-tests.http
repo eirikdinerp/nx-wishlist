@@ -1,19 +1,20 @@
-@authBaseUrl = https://dev-portal.eu.auth0.com
-@clientId = gMBKKq8uWxZ6DnJqoTGeANSnrK21NygK
-@clientSecret = Bu7gq0IlI_sGKshhPxDIe5Szn1ZkJPIyym_uqDmtC0fDLxnvm8sg7HQZtkpTEcZu
-@audience = https://stonefree-portal-auth.com
-@grantType = client_credentials
-@baseUrl = http://localhost:3333/api
+# From rest-client environment
+# @auth0Domain = {{auth0Domain}}
+# @auth0ClientId = {{auth0ClientId}}
+# @auth0ClientSecret = {{auth0ClientSecret}}
+# @audience = {{auth0Audience}}
+# @auth0GrantType = {{auth0GrantType}}
+# @apiBaseUrl = {{apiBaseUrl}}
 
 # @name auth
-POST {{authBaseUrl}}/oauth/token HTTP/1.1
+POST {{auth0Domain}}/oauth/token HTTP/1.1
 Content-Type: application/json
 
 {
-    "client_id":"{{clientId}}",
-    "client_secret":"{{clientSecret}}",
-    "audience":"{{audience}}",
-    "grant_type":"{{grantType}}"
+    "client_id":"{{auth0ClientId}}",
+    "client_secret":"{{auth0ClientSecret}}",
+    "audience":"{{auth0Audience}}",
+    "grant_type":"{{auth0GrantType}}"
 }
 
 ###
@@ -21,12 +22,12 @@ Content-Type: application/json
 @authToken = {{auth.response.body.access_token}}
 
 # @name getAllWishlists
-GET {{baseUrl}}/wishlists HTTP/1.1
+GET {{apiBaseUrl}}/wishlists HTTP/1.1
 Authorization: Bearer {{authToken}}
 ###
 
 # @name createWishlist
-POST {{baseUrl}}/wishlists HTTP/1.1
+POST {{apiBaseUrl}}/wishlists HTTP/1.1
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
@@ -39,12 +40,12 @@ Content-Type: application/json
 @wishlistId = {{createWishlist.response.body.$._id}}
 
 # @name getCreatedWishlist
-GET {{baseUrl}}/wishlists/{{wishlistId}} HTTP/1.1
+GET {{apiBaseUrl}}/wishlists/{{wishlistId}} HTTP/1.1
 Authorization: Bearer {{authToken}}
 ###
 
 ## @name createWish
-POST {{baseUrl}}/wishlists/{{wishlistId}}/wishes HTTP/1.1
+POST {{apiBaseUrl}}/wishlists/{{wishlistId}}/wishes HTTP/1.1
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
@@ -55,20 +56,20 @@ Content-Type: application/json
 ###
 
 ## @name getWishes
-GET {{baseUrl}}/wishlists/{{wishlistId}}/wishes HTTP/1.1
+GET {{apiBaseUrl}}/wishlists/{{wishlistId}}/wishes HTTP/1.1
 Authorization: Bearer {{authToken}}
 ###
 
 @wishId = {{getWishes.response.body.$[0]._id}}
 
 ## @name deleteWish
-DELETE {{baseUrl}}/wishlists/{{wishlistId}}/wishes/{{wishId}} HTTP/1.1
+DELETE {{apiBaseUrl}}/wishlists/{{wishlistId}}/wishes/{{wishId}} HTTP/1.1
 Authorization: Bearer {{authToken}}
 ###
 
 
 
 # @name deleteCreatedWishlist
-DELETE  {{baseUrl}}/wishlists/{{wishlistId}} HTTP/1.1
+DELETE  {{apiBaseUrl}}/wishlists/{{wishlistId}} HTTP/1.1
 Authorization: Bearer {{authToken}}
 ###

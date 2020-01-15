@@ -21,8 +21,11 @@ export class WishlistService {
     return await createdWishlist.save();
   }
 
-  async findAll(): Promise<Wishlist[]> {
-    return await this.wishlistModel.find().exec();
+  async findAll(userId?: string): Promise<Wishlist[]> {
+    if (!userId) {
+      return await this.wishlistModel.find().exec();
+    }
+    return await this.wishlistModel.find({ ownerId: userId }).exec();
   }
 
   async findOne(id: string): Promise<Wishlist> {
