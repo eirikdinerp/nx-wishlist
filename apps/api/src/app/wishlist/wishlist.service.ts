@@ -44,6 +44,6 @@ export class WishlistService {
     id: string,
     updateWishlistDto: CreateWishlistDto
   ): Promise<Wishlist> {
-    return this.wishlistModel.update({ _id: id }, updateWishlistDto);
+    return this.wishlistModel.updateOne({ _id: id }, updateWishlistDto);
   }
 }

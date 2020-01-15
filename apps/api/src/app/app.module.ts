@@ -7,8 +7,7 @@ import { AuthzModule } from './authz/authz.module';
 import { WishlistController } from './wishlist/wishlist.controller';
 
 export function logger(req: Request, res, next) {
-  console.log(`Request...`);
-  console.dir(req.headers);
+  console.log(`Request... ${req.method}`);
   next();
 }
 
@@ -28,10 +27,8 @@ export function logger(req: Request, res, next) {
   controllers: [],
   providers: [ConfigService]
 })
-export class AppModule {}
-
-// implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer.apply(logger).forRoutes(WishlistController);
-//   }
-// }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(logger).forRoutes(WishlistController);
+  }
+}
