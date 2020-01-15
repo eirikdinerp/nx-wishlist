@@ -48,5 +48,5 @@ export class WishlistsComponent {
     this.saveList.emit(wl);
   }
 
-  onGetLinkClicked(wl: Wishlist) {}
+  onShareClicked(wl: Wishlist) {}
 }
