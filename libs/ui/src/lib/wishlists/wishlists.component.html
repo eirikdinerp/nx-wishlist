@@ -10,24 +10,38 @@
         <mat-card-header>
           <div mat-card-avatar class="wishlist-image"></div>
           <mat-card-title>
-            {{ wl.title }}
+            <mat-form-field>
+              <input matInput placeholder="Title" [(ngModel)]="wl.title" />
+            </mat-form-field>
+            <mat-slide-toggle [(ngModel)]="wl.isActive"
+              >Active</mat-slide-toggle
+            >
           </mat-card-title>
-          <mat-card-subtitle>{{ wl.ownerId }}</mat-card-subtitle>
+          <mat-card-subtitle>
+            <p>{{ wl.ownerId }}</p>
+          </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="wishlist-card-content">
-          <div style="margin-top:8px;">
-            <mat-form-field class="example-full-width">
-              <input
-                matInput
-                placeholder="description"
-                [(ngModel)]="wl.description"
-              />
-            </mat-form-field>
-          </div>
+          <mat-form-field class="example-full-width">
+            <input
+              matInput
+              placeholder="description"
+              [(ngModel)]="wl.description"
+            />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Occasion</mat-label>
+            <mat-select [(ngModel)]="wl.occasion" name="occasion">
+              <mat-option *ngFor="let oc of occasions" [value]="oc">
+                {{ oc }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </mat-card-content>
 
         <mat-card-actions>
           <button mat-button (click)="onViewClicked(wl)">VIEW</button>
+          <button mat-button (click)="onGetLinkClicked(wl)">GET LINK</button>
           <button mat-button (click)="onSaveClicked(wl)">SAVE</button>
           <button mat-button (click)="onDeleteClicked(wl)">DELETE</button>
         </mat-card-actions>

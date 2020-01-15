@@ -5,10 +5,11 @@ import { TableTestComponent } from './table-test/table-test.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './auth.guard';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'me', component: ProfileComponent },
+  { path: 'me', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];
 

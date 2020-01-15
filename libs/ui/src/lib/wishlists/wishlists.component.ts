@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { Wishlist } from '@wishlist/data';
+import { Wishlist, WishlistOccasion } from '@wishlist/data';
 
 @Component({
   selector: 'ui-wishlists',
@@ -19,7 +19,11 @@ export class WishlistsComponent {
     rows: 1
   };
 
+  WishlistOccasion = WishlistOccasion;
+  occasions;
+
   constructor(private breakpointObserver: BreakpointObserver) {
+    this.occasions = Object.keys(this.WishlistOccasion);
     /** Based on the screen size, switch from standard to one column per row */
     this.breakpointObserver.observe(Breakpoints.Handset).subscribe(brState => {
       if (brState.matches) {
@@ -43,4 +47,6 @@ export class WishlistsComponent {
   onSaveClicked(wl: Wishlist) {
     this.saveList.emit(wl);
   }
+
+  onGetLinkClicked(wl: Wishlist) {}
 }

@@ -1,29 +1,34 @@
 import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
 
+export enum WishlistOccasion {
+  Wedding = 'WEDDING',
+  Birthday = 'BIRTHDAY',
+  Other = 'OTHER'
+}
 export interface Wishlist {
   _id?: string;
   ownerId?: string;
-  ownerName?: string;
   title?: string;
-  occassion?: string;
+  occasion?: WishlistOccasion;
   description?: string;
-  wishes?: Wish[];
+  isActive?: boolean;
 }
 
 export const WishlistSchema = new mongoose.Schema({
   title: String,
   description: String,
-  ownerId: String
+  ownerId: String,
+  occasion: String,
+  isActive: Boolean
 });
 
 export interface WishlistDocument extends Document {
   ownerId?: string;
-  ownerName?: string;
   title?: string;
-  occassion?: string;
+  occasion?: string;
   description?: string;
-  wishes?: Wish[];
+  isActive?: boolean;
 }
 
 export interface Wish {

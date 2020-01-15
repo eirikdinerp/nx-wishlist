@@ -11,7 +11,6 @@ import {
 } from '@nestjs/common';
 import { Wishlist, CreateWishlistDto } from '@wishlist/data';
 import { WishlistService } from './wishlist.service';
-import { of } from 'rxjs';
 import { AuthGuard } from '@nestjs/passport';
 
 @UseGuards(AuthGuard('jwt'))
