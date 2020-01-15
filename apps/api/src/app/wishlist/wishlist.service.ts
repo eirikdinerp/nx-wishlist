@@ -32,6 +32,10 @@ export class WishlistService {
     return await this.wishlistModel.findById(id).exec();
   }
 
+  async findOneBasedOnSecret(secret: string): Promise<Wishlist> {
+    return await this.wishlistModel.findOne({ secret: secret }).exec();
+  }
+
   async remove(id: string): Promise<Wishlist> {
     const removeWishes = () => this.wishModel.deleteMany({ wishlistId: id });
     const removeWishlist = () =>

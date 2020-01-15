@@ -13,6 +13,7 @@ export interface Wishlist {
   occasion?: WishlistOccasion;
   description?: string;
   isActive?: boolean;
+  secret?: string;
 }
 
 export const WishlistSchema = new mongoose.Schema({
@@ -20,15 +21,17 @@ export const WishlistSchema = new mongoose.Schema({
   description: String,
   ownerId: String,
   occasion: String,
-  isActive: Boolean
+  isActive: Boolean,
+  secret: String
 });
 
 export interface WishlistDocument extends Document {
   ownerId?: string;
   title?: string;
-  occasion?: string;
+  occasion?: WishlistOccasion;
   description?: string;
   isActive?: boolean;
+  secret?: string;
 }
 
 export interface Wish {

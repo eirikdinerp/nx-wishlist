@@ -60,6 +60,12 @@ GET {{apiBaseUrl}}/wishlists/{{wishlistId}}/wishes HTTP/1.1
 Authorization: Bearer {{authToken}}
 ###
 
+@wishlistSecret = 123
+## @name getWishlistBasedOnSecret
+GET {{apiBaseUrl}}/wishlists/{{wishlistSecret}} HTTP/1.1
+Authorization: Bearer {{authToken}}
+###
+
 @wishId = {{getWishes.response.body.$[0]._id}}
 
 ## @name deleteWish

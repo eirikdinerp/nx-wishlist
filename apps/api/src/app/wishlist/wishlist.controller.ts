@@ -34,6 +34,11 @@ export class WishlistController {
     return this.wishlistService.findAll(userId);
   }
 
+  @Get(':secret')
+  async findActive(@Param('secret') secret: string): Promise<Wishlist> {
+    return this.wishlistService.findOneBasedOnSecret(secret);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.wishlistService.findOne(id);
