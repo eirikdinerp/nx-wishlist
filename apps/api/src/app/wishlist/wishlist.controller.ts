@@ -12,8 +12,10 @@ import {
 import { Wishlist, CreateWishlistDto } from '@wishlist/data';
 import { WishlistService } from './wishlist.service';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
 @UseGuards(AuthGuard('jwt'))
+@ApiTags('wishlists')
 @Controller('wishlists')
 export class WishlistController {
   constructor(private readonly wishlistService: WishlistService) {}
