@@ -23,7 +23,7 @@ WORKDIR /home/node
 COPY --from=wishlist-packages /home/packages /home/node/
 COPY . /home/node
 
-RUN yarn build api --prod
+RUN yarn build email-service --prod
 
 
 ## RUN STAGE ###
@@ -33,7 +33,7 @@ FROM node:12-alpine
 WORKDIR /home/node
 
 # COPY --from=builder /home/node/package.json /home/node/yarn.lock /home/node/
-COPY --from=builder /home/node/dist/apps/api /home/node/dist/
+COPY --from=builder /home/node/dist/apps/email-service /home/node/dist/
 
 # RUN yarn install
 

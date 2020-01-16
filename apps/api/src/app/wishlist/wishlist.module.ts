@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 import { WishSchema, WishlistSchema } from '@wishlist/data';
 
@@ -15,6 +16,16 @@ import { AuthzModule } from '../authz/authz.module';
     MongooseModule.forFeature([
       { name: 'Wishlist', schema: WishlistSchema },
       { name: 'Wish', schema: WishSchema }
+    ]),
+    ClientsModule.register([
+      {
+        name: 'EMAIL_SERVICE',
+        transport: Transport.TCP,
+        options: {
+          host: '127.0.0.1',
+          port: 8888
+        }
+      }
     ]),
     AuthzModule
   ],

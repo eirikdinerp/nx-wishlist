@@ -150,7 +150,8 @@
                   "replace": "apps/api/src/environments/environment.ts",
                   "with": "apps/api/src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "externalDependencies": "none"
             }
           }
         },
@@ -232,6 +233,65 @@
       "schematics": {
         "@nrwl/angular:component": {
           "styleext": "scss"
+        }
+      }
+    },
+    "email-service": {
+      "root": "apps/email-service",
+      "sourceRoot": "apps/email-service/src",
+      "projectType": "application",
+      "prefix": "email-service",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/email-service",
+            "main": "apps/email-service/src/main.ts",
+            "tsConfig": "apps/email-service/tsconfig.app.json",
+            "assets": ["apps/email-service/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/email-service/src/environments/environment.ts",
+                  "with": "apps/email-service/src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "dev": {
+              "inspect": false
+            },
+            "externalDependencies": "none"
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "email-service:build",
+            "port": 7788
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/email-service/tsconfig.app.json",
+              "apps/email-service/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/email-service/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/email-service/jest.config.js",
+            "tsConfig": "apps/email-service/tsconfig.spec.json"
+          }
         }
       }
     }

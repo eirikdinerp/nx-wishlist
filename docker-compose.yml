@@ -26,13 +26,21 @@ services:
     environment:
       - MONGO_DB_URI=mongodb://mongo:27017/test
       - API_PORT=3333
-  web:
-    container_name: client
-    image: wishlist-client
+  email:
+    container_name: wishlist-email
+    image: wishlist-email
     build:
       context: .
-      dockerfile: portal.Dockerfile
-    depends_on:
-      - api
+      dockerfile: email-service.Dockerfile
     ports:
-      - 4200:80
+      - 8888:8888
+  # web:
+  #   container_name: client
+  #   image: wishlist-client
+  #   build:
+  #     context: .
+  #     dockerfile: portal.Dockerfile
+  #   depends_on:
+  #     - api
+  #   ports:
+  #     - 4200:80

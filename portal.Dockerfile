@@ -3,7 +3,7 @@ FROM node:12-alpine as builder
 
 WORKDIR /home/angular
 
-COPY --from=packages /home/packages /home/angular/
+COPY --from=wishlist-packages /home/packages /home/angular/
 COPY . /home/angular
 
 RUN yarn build portal
