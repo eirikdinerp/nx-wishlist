@@ -22,7 +22,7 @@ import { AuthzModule } from '../authz/authz.module';
         name: 'EMAIL_SERVICE',
         transport: Transport.TCP,
         options: {
-          host: '127.0.0.1',
+          host: 'wishlist-email',
           port: 8888
         }
       }

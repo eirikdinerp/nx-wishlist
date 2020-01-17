@@ -9,7 +9,8 @@ import {
   UseGuards,
   Req
 } from '@nestjs/common';
-import { Wishlist, CreateWishlistDto } from '@wishlist/data';
+import { Wishlist } from '@wishlist/data';
+import { CreateWishlistDto } from '../dtos/create-wishlist.dto';
 import { WishlistService } from './wishlist.service';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';

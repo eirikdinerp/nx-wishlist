@@ -16,7 +16,7 @@
 FROM node:12-alpine as builder
 
 ENV NODE_ENV build
-
+ENV NODE_OPTIONS=--max_old_space_size=4096
 # USER node
 WORKDIR /home/node
 
@@ -32,9 +32,9 @@ FROM node:12-alpine
 # USER node
 WORKDIR /home/node
 
-# COPY --from=builder /home/node/package.json /home/node/yarn.lock /home/node/
+COPY --from=builder /home/node/package.json /home/node/yarn.lock /home/node/
 COPY --from=builder /home/node/dist/apps/api /home/node/dist/
 
-# RUN yarn install
+RUN yarn install
 
 CMD ["node", "dist/main.js"]

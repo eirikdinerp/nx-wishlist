@@ -26,6 +26,8 @@ services:
     environment:
       - MONGO_DB_URI=mongodb://mongo:27017/test
       - API_PORT=3333
+      - AUTH0_DOMAIN=https://dev-portal.eu.auth0.com/
+      - AUTH0_AUDIENCE=https://api.stonefree.com/wishlists
   email:
     container_name: wishlist-email
     image: wishlist-email

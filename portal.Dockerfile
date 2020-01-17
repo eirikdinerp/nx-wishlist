@@ -6,7 +6,7 @@ WORKDIR /home/angular
 COPY --from=wishlist-packages /home/packages /home/angular/
 COPY . /home/angular
 
-RUN yarn build portal
+RUN yarn build portal --prod
 
 # RUN STAGE
 FROM nginx:1.17.1-alpine

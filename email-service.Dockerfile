@@ -32,9 +32,9 @@ FROM node:12-alpine
 # USER node
 WORKDIR /home/node
 
-# COPY --from=builder /home/node/package.json /home/node/yarn.lock /home/node/
+COPY --from=builder /home/node/package.json /home/node/yarn.lock /home/node/
 COPY --from=builder /home/node/dist/apps/email-service /home/node/dist/
 
-# RUN yarn install
+RUN yarn install
 
 CMD ["node", "dist/main.js"]

@@ -4,12 +4,8 @@ import { Injectable, Inject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ClientProxy } from '@nestjs/microservices';
 
-import {
-  Wishlist,
-  WishlistDocument,
-  CreateWishlistDto,
-  WishDocument
-} from '@wishlist/data';
+import { Wishlist, WishlistDocument, WishDocument } from '@wishlist/data';
+import { CreateWishlistDto } from '../dtos/create-wishlist.dto';
 
 @Injectable()
 export class WishlistService {

@@ -9,7 +9,8 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
-import { Wish, CreateWishDto } from '@wishlist/data';
+import { Wish } from '@wishlist/data';
+import { CreateWishDto } from '../../dtos/create-wish.dto';
 
 import { WishService } from './wish.service';
 import { ApiTags } from '@nestjs/swagger';
