@@ -36,13 +36,13 @@ services:
       dockerfile: email-service.Dockerfile
     ports:
       - 8888:8888
-  # web:
-  #   container_name: client
-  #   image: wishlist-client
-  #   build:
-  #     context: .
-  #     dockerfile: portal.Dockerfile
-  #   depends_on:
-  #     - api
-  #   ports:
-  #     - 4200:80
+  web:
+    container_name: client
+    image: wishlist-client
+    build:
+      context: .
+      dockerfile: portal.Dockerfile
+    depends_on:
+      - api
+    ports:
+      - 4200:80
